@@ -10,6 +10,8 @@ from app.routers import auth
 from app.database.database import SessionLocal
 from app.database.seed import seed_admin
 
+from app.routers.products import router as product_router
+
 import app.models
 
 Base.metadata.create_all(bind=engine)
@@ -26,6 +28,8 @@ app = FastAPI(
 )
 
 app.include_router(auth.router)
+
+app.include_router(product_router)
 
 
 
