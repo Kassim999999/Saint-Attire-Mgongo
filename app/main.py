@@ -7,9 +7,18 @@ from app.database.database import Base, engine
 
 from app.routers import auth
 
+from app.database.database import SessionLocal
+from app.database.seed import seed_admin
+
 import app.models
 
 Base.metadata.create_all(bind=engine)
+
+db = SessionLocal()
+
+seed_admin(db)
+
+db.close()
 
 app = FastAPI(
     title=settings.APP_NAME,
