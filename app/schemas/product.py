@@ -1,6 +1,5 @@
-from typing import Optional
-
 from pydantic import BaseModel
+from typing import Optional
 
 
 class ProductCreate(BaseModel):
@@ -8,9 +7,9 @@ class ProductCreate(BaseModel):
     description: str
     price: float
     stock: int
-    category: Optional[str] = None
     image: Optional[str] = None
     image2: Optional[str] = None
+    category_id: Optional[int] = None
 
 
 class ProductUpdate(BaseModel):
@@ -18,21 +17,20 @@ class ProductUpdate(BaseModel):
     description: Optional[str] = None
     price: Optional[float] = None
     stock: Optional[int] = None
-    category: Optional[str] = None
     image: Optional[str] = None
     image2: Optional[str] = None
+    category_id: Optional[int] = None
 
 
 class ProductResponse(BaseModel):
     id: int
     name: str
-    slug: str
     description: str
     price: float
     stock: int
-    category: Optional[str] = None
-    image: Optional[str] = None
-    image2: Optional[str] = None
+    image: Optional[str]
+    image2: Optional[str]
+    category_id: Optional[int]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
