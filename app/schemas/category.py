@@ -1,9 +1,13 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
 class CategoryCreate(BaseModel):
     name: str
-    slug: str
+
+
+class CategoryUpdate(BaseModel):
+    name: Optional[str] = None
 
 
 class CategoryResponse(BaseModel):

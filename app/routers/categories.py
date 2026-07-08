@@ -8,6 +8,7 @@ from app.schemas.category import (
     CategoryCreate,
     CategoryResponse,
 )
+from app.utils.slug import generate_slug
 
 router = APIRouter(
     prefix="/categories",
@@ -20,8 +21,10 @@ def create_category(
     category: CategoryCreate,
     db: Session = Depends(get_db)
 ):
+    slug = generate_slug(category.name)
+
     existing = db.query(Category).filter(
-        Category.slug == category.slug
+        Category.slug == slug
     ).first()
 
     if existing:
@@ -30,7 +33,10 @@ def create_category(
             detail="Category already exists"
         )
 
-    new_category = Category(**category.dict())
+    new_category = Category(
+        name=category.name,
+        slug=slug
+    )
 
     db.add(new_category)
     db.commit()
