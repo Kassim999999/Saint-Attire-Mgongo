@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 
 from app.database.database import get_db
+from app.dependencies.auth import get_current_admin
 from app.models.product import Product
 from app.schemas.product import (
     ProductCreate,
@@ -41,7 +42,8 @@ def single_product(
 @router.post("", response_model=ProductResponse)
 def create(
     product: ProductCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    admin=Depends(get_current_admin)
 ):
     return product_service.create_product(db, product)
 
@@ -50,7 +52,8 @@ def create(
 def update_product(
     product_id: int,
     product_data: ProductUpdate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    admin=Depends(get_current_admin)
 ):
     product = (
         db.query(Product)
@@ -76,7 +79,8 @@ def update_product(
 @router.delete("/{product_id}")
 def delete_product(
     product_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    admin=Depends(get_current_admin)
 ):
     product = (
         db.query(Product)

@@ -7,7 +7,7 @@ from app.schemas.auth import (
     LoginRequest,
     TokenResponse,
 )
-from app.utils.security import create_access_token
+from app.utils.jwt import create_access_token
 from app.utils.hash import verify_password
 
 router = APIRouter(

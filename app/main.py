@@ -16,6 +16,8 @@ from app.routers.categories import router as category_router
 
 from app.routers.auth import router as auth_router
 
+from app.routers import auth
+
 import app.models
 
 Base.metadata.create_all(bind=engine)
