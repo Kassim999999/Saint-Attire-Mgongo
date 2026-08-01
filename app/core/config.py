@@ -24,6 +24,8 @@ class Settings:
 
     PAYSTACK_SECRET_KEY = os.getenv("PAYSTACK_SECRET_KEY")
 
+    PAYSTACK_PUBLIC_KEY = os.getenv("PAYSTACK_PUBLIC_KEY")
+
     ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
 
     ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")

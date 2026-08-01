@@ -18,6 +18,16 @@ from app.routers.auth import router as auth_router
 
 from app.routers import auth
 
+from app.routers.orders import router as order_router
+
+from app.routers.dashboard import router as dashboard_router
+
+from app.routers.uploads import router as upload_router
+
+from app.routers.payments import router as payment_router
+
+from fastapi.staticfiles import StaticFiles
+
 import app.models
 
 Base.metadata.create_all(bind=engine)
@@ -41,6 +51,14 @@ app.include_router(category_router)
 
 app.include_router(auth_router)
 
+app.include_router(order_router)
+
+app.include_router(dashboard_router)
+
+app.include_router(upload_router)
+
+app.include_router(payment_router)
+
 
 
 app.add_middleware(
@@ -51,6 +69,12 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+)
+
+app.mount(
+    "/uploads",
+    StaticFiles(directory="uploads"),
+    name="uploads"
 )
 
 
