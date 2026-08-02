@@ -39,6 +39,11 @@ class Product(Base):
         back_populates="products"
     )
 
+    order_items = relationship(
+    "OrderItem",
+    back_populates="product"
+)
+
     images = relationship(
     "ProductImage",
     back_populates="product",

@@ -26,6 +26,8 @@ from app.routers.uploads import router as upload_router
 
 from app.routers.payments import router as payment_router
 
+from app.routers.webhooks import router as webhook_router
+
 from fastapi.staticfiles import StaticFiles
 
 import app.models
@@ -58,6 +60,8 @@ app.include_router(dashboard_router)
 app.include_router(upload_router)
 
 app.include_router(payment_router)
+
+app.include_router(webhook_router)
 
 
 

@@ -100,3 +100,48 @@ def delete_product(
     return {
         "message": "Product deleted successfully"
     }
+
+from fastapi import UploadFile, File, Form
+
+from app.utils.cloudinary import upload_image
+
+
+@router.post("/with-images")
+def create_product_with_images(
+    name: str = Form(...),
+    description: str = Form(...),
+    price: float = Form(...),
+    stock: int = Form(...),
+    category_id: int = Form(...),
+
+    image: UploadFile = File(...),
+    image2: UploadFile = File(None),
+
+    db: Session = Depends(get_db),
+    admin=Depends(get_current_admin)
+):
+
+    image_url = upload_image(image)
+
+    image2_url = None
+
+    if image2:
+        image2_url = upload_image(image2)
+
+    product = Product(
+        name=name,
+        description=description,
+        price=price,
+        stock=stock,
+        category_id=category_id,
+        image=image_url,
+        image2=image2_url
+    )
+
+    db.add(product)
+
+    db.commit()
+
+    db.refresh(product)
+
+    return product
