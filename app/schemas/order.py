@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import List
 from datetime import datetime
+from enum import Enum
 
 
 class OrderItemCreate(BaseModel):
@@ -49,3 +50,14 @@ class OrderResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+class OrderStatus(str, Enum):
+    Pending = "Pending"
+    Processing = "Processing"
+    Shipped = "Shipped"
+    Delivered = "Delivered"
+    Cancelled = "Cancelled"
+
+
+class OrderStatusUpdate(BaseModel):
+    status: OrderStatus

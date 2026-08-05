@@ -41,8 +41,28 @@ seed_admin(db)
 db.close()
 
 app = FastAPI(
-    title=settings.APP_NAME,
-    version=settings.APP_VERSION
+    title="SAINT Attire API",
+    description="""
+## SAINT Attire Backend API
+
+Features:
+
+- JWT Authentication
+- Products
+- Categories
+- Orders
+- Inventory
+- Dashboard Analytics
+- Cloudinary Image Uploads
+- Paystack Payments
+
+Built with FastAPI ❤️
+""",
+    version="2.0.0",
+    contact={
+        "name": "SAINT Attire",
+        "email": "support@saintattire.com",
+    },
 )
 
 app.include_router(auth.router)

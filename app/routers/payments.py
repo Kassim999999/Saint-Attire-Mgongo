@@ -13,7 +13,11 @@ router = APIRouter(
 )
 
 
-@router.post("/initialize/{order_id}")
+@router.post(
+    "/initialize/{order_id}",
+    summary="Initialize Paystack payment",
+    description="Creates a Paystack payment link for an order.",
+)
 def initialize_payment(
     order_id: int,
     db: Session = Depends(get_db)
@@ -68,7 +72,11 @@ def initialize_payment(
 
     return data["data"]
 
-@router.get("/verify/{reference}")
+@router.get(
+    "/verify/{reference}",
+    summary="Verify payment",
+    description="Verifies a Paystack payment using its reference.",
+)
 def verify_payment(
     reference: str,
     db: Session = Depends(get_db)

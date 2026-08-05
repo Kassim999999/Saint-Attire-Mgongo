@@ -14,7 +14,11 @@ router = APIRouter(
 )
 
 
-@router.get("")
+@router.get(
+    "",
+    summary="Dashboard statistics",
+    description="Returns sales, revenue, pending orders, products and low stock statistics.",
+)
 def dashboard(
     db: Session = Depends(get_db),
     admin=Depends(get_current_admin)
